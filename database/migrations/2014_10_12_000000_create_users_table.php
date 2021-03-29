@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone');
-            $table->enum('gender', ['MALE', 'FEMALE']);
-            $table->string('address');
+            $table->string('phone')->nullable(true);
+            $table->enum('gender', ['MALE', 'FEMALE'])->nullable(true);
+            $table->string('address')->nullable(true);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();

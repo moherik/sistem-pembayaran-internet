@@ -1,0 +1,71 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.btn {
+    @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none disabled:opacity-25 transition ease-in-out duration-150;
+}
+
+.btn-green {
+    @apply bg-green-600 text-white hover:bg-green-700;
+}
+
+.btn-blue {
+    @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.btn-red {
+    @apply bg-red-600 text-white hover:bg-red-700;
+}
+
+.btn-black {
+    @apply bg-gray-800 text-white hover:bg-gray-700;
+}
+
+.table {
+    @apply shadow-lg bg-white;
+}
+
+.table thead th {
+    @apply bg-blue-100 border text-left px-8 py-4;
+}
+
+.table tbody td {
+    @apply border px-8 py-4;
+}
+
+.heading {
+    @apply font-semibold text-xl text-gray-800 leading-tight;
+}
+
+.container {
+    @apply max-w-7xl mx-auto sm:px-6 lg:px-8;
+}
+
+.container .card {
+    @apply bg-white overflow-hidden shadow-md sm:rounded-lg;
+}
+
+.input {
+    @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block;
+}
+
+.form .form-item {
+    @apply flex items-center mb-6;
+}
+
+.form .form-item .label {
+    @apply w-1/4 mr-5 text-right text-base font-semibold;
+}
+
+.form .form-item .error {
+    @apply text-red-600 absolute text-xs;
+}
+
+.alert-danger {
+    @apply bg-red-100 border border-red-400 text-red-700;
+}
+
+.alert-success {
+    @apply bg-green-100 border border-green-400 text-green-700;
+}

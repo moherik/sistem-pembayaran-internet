@@ -1,5 +1,8 @@
 {
     "private": true,
+    "engines": {
+        "node": "12.x"
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -8,7 +11,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "postinstall": "npm run prod"
+        "heroku-postbuild": "npm run prod"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.2.1",

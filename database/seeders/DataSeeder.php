@@ -24,6 +24,9 @@ class DataSeeder extends Seeder
             'username' => 'mabengga',
             'email' => 'muherik.maulana@gmail.com',
             'password' => Hash::make('mabengga'),
+            'phone' => '230284208230',
+            'gender' => 'MALE',
+            'addess' => 'IND',
             'role' => 'USER',
         ]);
 

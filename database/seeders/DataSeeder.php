@@ -26,7 +26,7 @@ class DataSeeder extends Seeder
             'password' => Hash::make('mabengga'),
             'phone' => '230284208230',
             'gender' => 'MALE',
-            'addess' => 'IND',
+            'address' => 'IND',
             'role' => 'USER',
         ]);
 

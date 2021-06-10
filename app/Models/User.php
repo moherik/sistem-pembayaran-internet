@@ -90,6 +90,9 @@ class User extends Authenticatable
 
     public function packetDetail()
     {
+        if($this->transaction == null)
+            return '-';
+
         $transaction = $this->transaction->where('user_id', $this->id)->where('status', 'SUCCESS')->orderBy('created_at', 'DESC')->get();
         if ($transaction != null && count($transaction) > 0) {
             return $this->transaction->packetLabel();
@@ -105,6 +108,9 @@ class User extends Authenticatable
 
     public function hasActivePacket()
     {
+        if($this->transaction == null)
+            return false;
+            
         return $this->transaction->where('pay_date', '>=', Carbon::now())->exists();
     }
 }

@@ -22,8 +22,8 @@ class TransactionController extends Controller
     public function totalPayment()
     {
         $myTrx = Transaction::where('user_id', Auth::user()->id);
-        $unpaid = $myTrx->where('status', 'PENDING')->sum('total_price');
-        $payDate = $myTrx->orderBy('created_at', 'DESC')->first()->pay_date;
+        $unpaid = $myTrx->where('status', 'PENDING')->sum('total_price') ?? 9;
+        $payDate = $myTrx->orderBy('created_at', 'DESC')->first()->pay_date ?? null;
         return response()->json([
             'unpaid' => $unpaid,
             'payDate' => $payDate,

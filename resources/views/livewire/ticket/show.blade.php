@@ -1,11 +1,21 @@
-<div>
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Daftar Tiket</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasbor</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <x-slot name="header">
-    <h2 class="heading mr-auto">Daftar Tiket</h2>
-  </x-slot>
-
-  <div class="py-12">
-    <div class="container">
+  <section class="content">
+    <div class="container-fluid">
       <div class="card">
 
         <table class="table w-full">
@@ -30,10 +40,8 @@
               <td>{!! $ticket->statusLabel() !!}</td>
               <td>{{ $ticket->created_at->format('d-m-Y') }}</td>
               <td>
-                <div class="flex">
-                  <a href="{{ route('ticket.detail', $ticket->id) }}" class="btn btn-blue mr-2">Detail</a>
-                  <button wire:click="confirmDelete({{ $ticket->id }})" type="button" class="btn btn-red">Hapus</button>
-                </div>
+                <a href="{{ route('ticket.detail', $ticket->id) }}" class="btn btn-primary btn-sm mr-2">Detail</a>
+                <button wire:click="confirmDelete({{ $ticket->id }})" type="button" class="btn btn-danger btn-sm">Hapus</button>
               </td>
             </tr>
             @empty
@@ -46,6 +54,6 @@
 
       </div>
     </div>
-  </div>
+</div>
 
 </div>

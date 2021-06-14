@@ -1,11 +1,21 @@
-<div>
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Daftar Transaksi</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasbor</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <x-slot name="header">
-        <h2 class="heading mr-auto">Daftar Transaksi</h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="container">
+    <section class="content">
+        <div class="container-fluid">
             <div class="card">
 
                 <table class="table w-full">
@@ -28,10 +38,8 @@
                             <td>{{ $transaction->createdDate() }}</td>
                             <td>{!! $transaction->statusLabel() !!}</td>
                             <td>
-                                <div class="flex">
-                                    <button wire:click="confirmStatus({{ $transaction->id }}, 'SUCCESS')" type="button" class="btn btn-blue mr-2">Sukses</button>
-                                    <button wire:click="confirmStatus({{ $transaction->id }}, 'PENDING')" type="button" class="btn btn-black">Pending</button>
-                                </div>
+                                <button wire:click="confirmStatus({{ $transaction->id }}, 'SUCCESS')" type="button" class="btn btn-primary btn-sm mr-2">Sukses</button>
+                                <button wire:click="confirmStatus({{ $transaction->id }}, 'PENDING')" type="button" class="btn btn-secondary btn-sm">Pending</button>
                             </td>
                         </tr>
                         @empty
@@ -44,6 +52,6 @@
 
             </div>
         </div>
-    </div>
+</div>
 
 </div>

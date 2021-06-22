@@ -42,11 +42,6 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <li class="nav-item">
@@ -60,9 +55,9 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
+            <a href="#" class="brand-link">
                 <img src="{{ asset('img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">AiNetwork</span>
             </a>
 
             <!-- Sidebar -->
@@ -70,7 +65,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                    <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('img/no-profile.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name ?? '' }}</a>
@@ -132,10 +127,7 @@
         {{ $slot }}
 
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-               <b>Version</b> 3.1.0
-            </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2021 <a href="#">AiNetwork</a>.</strong>
         </footer>
 
         <!-- Control Sidebar -->

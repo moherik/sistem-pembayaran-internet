@@ -15,7 +15,9 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $user = User::create($data);
-        return response()->json($user, 200);
+
+        return response()
+            ->json(['token' => $user->createToken($data['device_name'])->plainTextToken], 200);
     }
 
     public function login(LoginRequest $request)

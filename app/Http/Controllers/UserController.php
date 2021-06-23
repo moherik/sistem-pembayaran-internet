@@ -17,7 +17,7 @@ class UserController extends Controller
         $user = User::create($data);
 
         return response()
-            ->json(['token' => $user->createToken($data['device_name'])->plainTextToken], 200);
+            ->json(['token' => $user->createToken('riva')->plainTextToken], 200);
     }
 
     public function login(LoginRequest $request)

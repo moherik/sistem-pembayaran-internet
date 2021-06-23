@@ -20,10 +20,10 @@ class DataSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Erik Mabengga',
-            'username' => 'mabengga',
-            'email' => 'muherik.maulana@gmail.com',
-            'password' => Hash::make('mabengga'),
+            'name' => 'User',
+            'username' => 'user',
+            'email' => 'user@mail.com',
+            'password' => 'user',
             'phone' => '230284208230',
             'gender' => 'MALE',
             'address' => 'IND',
@@ -38,7 +38,7 @@ class DataSeeder extends Seeder
             'type' => 'MONTHLY'
         ]);
 
-        $trx = Transaction::create([
+        Transaction::create([
             'user_id' => $user->id,
             'packet_id' => $packet->id,
             'total_item' => 1,
@@ -46,7 +46,7 @@ class DataSeeder extends Seeder
             'pay_date' => now(),
         ]);
 
-        $ticket = Ticket::create([
+        Ticket::create([
             'user_id' => $user->id,
             'title' => 'Halo Dunia'
         ]);

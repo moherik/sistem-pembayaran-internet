@@ -15,7 +15,7 @@ class TransactionController extends Controller
     public function history()
     {
         $userId = Auth::user()->id;
-        $transactions = Transaction::where('user_id', $userId)->where('status', 'SUCCESS')->orderBy('created_at', 'DESC')->get();
+        $transactions = Transaction::where('user_id', $userId)->with('packet')->where('status', 'SUCCESS')->orderBy('created_at', 'DESC')->get();
         return response()->json($transactions, 200);
     }
 

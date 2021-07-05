@@ -105,5 +105,6 @@ class TransactionController extends Controller
         $orderId = $request->get('order_id');
         $trxStatus = $request->get('transaction_status');
         Transaction::where('trx_code', $orderId)->update(['status' => 'WAITING']);
+        echo 'Selesaikan Pembayaran, anda bisa menutup browser ini.';
     }
 }

@@ -26,6 +26,7 @@ class TransactionController extends Controller
         $unpaid = $myTrx->where('status', 'PENDING')->sum('total_price') ?? 9;
         $payDate = $myTrx->orderBy('created_at', 'DESC')->first()->pay_date ?? null;
         return response()->json([
+            'orderId' => $myTrx->where('status', 'PENDING')->first()->order_id,
             'unpaid' => $unpaid,
             'payDate' => $payDate,
         ], 200);
@@ -80,6 +81,8 @@ class TransactionController extends Controller
             \Midtrans\Config::$isProduction = false;
             \Midtrans\Config::$isSanitized = true;
             \Midtrans\Config::$is3ds = true;
+
+            $transaction = 
 
             $params = array(
                 'transaction_details' => array(

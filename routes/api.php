@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/total-payment', [TransactionController::class, 'totalPayment'])->name('totalPayment');
         Route::get('/pay', [TransactionController::class, 'pay'])->name('pay');
         Route::get('/buy/{packetId}', [TransactionController::class, 'buy'])->name('buy');
+        Route::get('/check', [TransactionController::class, 'check'])->name('check');
     });
 
     Route::group(['prefix' => '/tickets', 'as' => 'tickets.'], function () {

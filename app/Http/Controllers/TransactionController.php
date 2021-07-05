@@ -31,6 +31,12 @@ class TransactionController extends Controller
         ], 200);
     }
 
+    public function check()
+    {
+        $trx = Auth::user()->transaction()->first();
+        return response()->json($trx);
+    }
+
     public function buy($packetId)
     {
         $user = Auth::user();

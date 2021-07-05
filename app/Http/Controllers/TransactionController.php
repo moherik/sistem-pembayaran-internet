@@ -88,9 +88,9 @@ class TransactionController extends Controller
                     'gross_amount' => $trx->total_price,
                 ),
                 'customer_details' => array(
-                    'first_name' => $trx->name,
-                    'email' => $trx->email,
-                    'phone' => $trx->phone,
+                    'first_name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
                 ),
             );
 

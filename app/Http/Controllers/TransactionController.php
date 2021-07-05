@@ -24,7 +24,7 @@ class TransactionController extends Controller
     {
         $myTrx = Transaction::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->first();
         return response()->json([
-            'orderId' => $myTrx->order_id,
+            'orderId' => $myTrx->trx_code,
             'unpaid' => $myTrx->total_price,
             'payDate' => $myTrx->pay_date,
         ], 200);

@@ -33,7 +33,7 @@ class TransactionController extends Controller
 
     public function check()
     {
-        $trx = Auth::user()->transaction()->first();
+        $trx = Auth::user()->transaction()->orderBy('created_at', 'DESC')->first();
         return response()->json($trx);
     }
 

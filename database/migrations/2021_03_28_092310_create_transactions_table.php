@@ -21,7 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('total_item')->default(1);
             $table->integer('total_price');
             $table->timestamp('pay_date');
-            $table->enum('status', ['PENDING', 'SUCCESS', 'CANCEL'])->default('PENDING');
+            $table->enum('status', ['PENDING', 'WAITING', 'SUCCESS', 'CANCEL'])->default('PENDING');
             $table->timestamps();
         });
     }

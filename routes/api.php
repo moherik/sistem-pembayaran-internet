@@ -47,3 +47,5 @@ Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
     Route::post('/register', [UserController::class, 'register'])->name('register');
     Route::post('/login', [UserController::class, 'login'])->name('login');
 });
+
+Route::get('api/transactions/pay-finish', [TransactionController::class, 'payFinish'])->name('pay-finish');

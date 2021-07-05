@@ -39,7 +39,10 @@ class TransactionController extends Controller
     public function buy($packetId)
     {
         $user = Auth::user();
-        if ($user->has_active_packet) {
+
+        $pendingPacket = $user->transaction()->where('status', '!=', 'SUCCESS')->first();
+
+        if ($pendingPacket || $user->has_active_packet) {
             return response()->json([
                 'code' => 400,
                 'status' => 'ERROR',

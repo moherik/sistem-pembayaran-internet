@@ -80,7 +80,7 @@ class TransactionController extends Controller
             \Midtrans\Config::$isProduction = false;
             \Midtrans\Config::$isSanitized = true;
             \Midtrans\Config::$is3ds = true;
-            
+
             $params = array(
                 'transaction_details' => array(
                     'order_id' => $user->transaction->trx_code,
@@ -92,25 +92,68 @@ class TransactionController extends Controller
                     'phone' => $user->phone,
                 ),
             );
-                
+
             $snapUrl = \Midtrans\Snap::getSnapUrl($params);
-    
-            return response()->json(['token' => $snapUrl]);                
+
+            return response()->json(['token' => $snapUrl]);
         } catch (HttpException $e) {
             return response()->json([
                 'code' => $e->getCode(),
                 'status' => 'ERROR',
                 'message' => $e->getMessage()
             ], $e->getStatusCode());
-
         }
     }
 
     public function payFinish(Request $request)
     {
-        $orderId = $request->get('order_id');
-        $trxStatus = $request->get('transaction_status');
-        Transaction::where('trx_code', $orderId)->update(['status' => 'WAITING']);
         echo 'Selesaikan Pembayaran, anda bisa menutup browser ini.';
+    }
+
+    public function handleMidtransHook()
+    {
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-eTSr0VeD0QjZWQ1IHdWp_qTY';
+        $notif = new \Midtrans\Notification();
+
+        $transaction = $notif->transaction_status;
+        $type = $notif->payment_type;
+        $order_id = $notif->order_id;
+        $fraud = $notif->fraud_status;
+
+        if ($transaction == 'capture') {
+            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+            if ($type == 'credit_card') {
+                if ($fraud == 'challenge') {
+                    // TODO set payment status in merchant's database to 'Challenge by FDS'
+                    // TODO merchant should decide whether this transaction is authorized or not in MAP
+                    echo "Transaction order_id: " . $order_id . " is challenged by FDS";
+                } else {
+                    // TODO set payment status in merchant's database to 'Success'
+                    Transaction::where(['trx_code' => $order_id])->update(['status' => 'SUCCESS']);
+                    echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
+                }
+            }
+        } else if ($transaction == 'settlement') {
+            // TODO set payment status in merchant's database to 'Settlement'
+            Transaction::where(['trx_code' => $order_id])->update(['status' => 'SUCCESS']);
+            echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
+        } else if ($transaction == 'pending') {
+            // TODO set payment status in merchant's database to 'Pending'
+            Transaction::where(['trx_code' => $order_id])->update(['status' => 'WAITING']);
+            echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
+        } else if ($transaction == 'deny') {
+            // TODO set payment status in merchant's database to 'Denied'
+            Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
+        } else if ($transaction == 'expire') {
+            // TODO set payment status in merchant's database to 'expire'
+            Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
+        } else if ($transaction == 'cancel') {
+            // TODO set payment status in merchant's database to 'Denied'
+            Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
+            echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
+        }
     }
 }

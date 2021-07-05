@@ -70,7 +70,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function pay()
+    public function pay($orderId)
     {
         try {
             $user = Auth::user();
@@ -80,23 +80,23 @@ class TransactionController extends Controller
             \Midtrans\Config::$isSanitized = true;
             \Midtrans\Config::$is3ds = true;
 
-            $transaction = 
+            $trx = $user->transaction()->where(['trx_code' => $orderId])->first();
 
             $params = array(
                 'transaction_details' => array(
-                    'order_id' => $user->transaction->trx_code,
-                    'gross_amount' => $user->transaction->total_price,
+                    'order_id' => $trx->trx_code,
+                    'gross_amount' => $trx->total_price,
                 ),
                 'customer_details' => array(
-                    'first_name' => $user->name,
-                    'email' => $user->email,
-                    'phone' => $user->phone,
+                    'first_name' => $trx->name,
+                    'email' => $trx->email,
+                    'phone' => $trx->phone,
                 ),
             );
 
             $snapUrl = \Midtrans\Snap::getSnapUrl($params);
 
-            return response()->json(['token' => $snapUrl]);
+            return response()->json(['url' => $snapUrl]);
         } catch (HttpException $e) {
             return response()->json([
                 'code' => $e->getCode(),

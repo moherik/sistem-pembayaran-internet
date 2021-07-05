@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::group(['prefix' => '/transactions', 'as' => 'transaction.'], function () {
         Route::get('/history', [TransactionController::class, 'history'])->name('history');
         Route::get('/total-payment', [TransactionController::class, 'totalPayment'])->name('totalPayment');
-        Route::get('/pay', [TransactionController::class, 'pay'])->name('pay');
+        Route::get('/pay/{orderId}', [TransactionController::class, 'pay'])->name('pay');
         Route::get('/buy/{packetId}', [TransactionController::class, 'buy'])->name('buy');
         Route::get('/check', [TransactionController::class, 'check'])->name('check');
     });

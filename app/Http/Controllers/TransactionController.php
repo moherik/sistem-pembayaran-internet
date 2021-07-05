@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Packet;
 use App\Models\Transaction;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,7 +31,7 @@ class TransactionController extends Controller
 
     public function check()
     {
-        $trx = Auth::user()->transaction()->orderBy('created_at', 'DESC')->first();
+        $trx = Auth::user()->transaction()->orderBy('created_at', 'DESC')->with('packet')->first();
         return response()->json($trx);
     }
 
@@ -44,10 +43,10 @@ class TransactionController extends Controller
 
         if ($pendingPacket || $user->has_active_packet) {
             return response()->json([
-                'code' => 400,
+                'code' => 500,
                 'status' => 'ERROR',
                 'message' => 'Akun sudah punya paket aktif'
-            ], 400);
+            ], 500);
         }
 
         try {

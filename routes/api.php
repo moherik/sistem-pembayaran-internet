@@ -50,4 +50,4 @@ Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
 });
 
 Route::get('/transactions/pay-finish', [TransactionController::class, 'payFinish']);
-Route::get('/transactions/notification', [TransactionController::class, 'handleMidtransHook']);
+Route::post('/transactions/notification', [TransactionController::class, 'handleMidtransHook']);

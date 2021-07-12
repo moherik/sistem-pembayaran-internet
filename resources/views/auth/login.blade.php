@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>AI</b>Network</a>
+            <img src="{{ asset('img/logo.png') }}" width="300"/>
         </div>
 
         <div class="card">

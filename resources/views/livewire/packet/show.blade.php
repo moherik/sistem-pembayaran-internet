@@ -25,9 +25,9 @@
                     <thead>
                         <th>No.</th>
                         <th>Nama Paket</th>
-                        <th>Harga</th>
                         <th>Kecepatan</th>
                         <th>Tipe Paket</th>
+                        <th>Harga</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -35,9 +35,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $packet->name }}</td>
-                            <td>{{ $packet->priceLabel() }}</td>
                             <td>{{ $packet->speedLabel() }}</td>
                             <td>{{ $packet->typeLabel() }}</td>
+                            <td>{{ $packet->priceLabel() }}</td>
                             <td>
                                 <a href="{{ route('packet.form', ['formType' => 'edit', 'packetId' => $packet->id]) }}" class="btn btn-primary btn-sm mr-2">Edit</a>
                                 <button wire:click="confirmDelete({{ $packet->id }})" type="button" class="btn btn-danger btn-sm">Hapus</button>

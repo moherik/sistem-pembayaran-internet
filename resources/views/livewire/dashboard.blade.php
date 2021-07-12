@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Dasbor</h1>
+                    <h1>Dasboard</h1>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <h3>{{ $totalTicket }}</h3>
-                            <p>Total Tiket</p>
+                            <p>Total Pengaduan</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-history"></i>

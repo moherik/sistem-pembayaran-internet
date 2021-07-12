@@ -30,25 +30,5 @@ class DataSeeder extends Seeder
             'role' => 'USER',
         ]);
 
-        $packet = Packet::create([
-            'name' => 'Paket Ketengan',
-            'price' => 200000,
-            'speed' => 20,
-            'description' => 'deskripsi',
-            'type' => 'MONTHLY'
-        ]);
-
-        Transaction::create([
-            'user_id' => $user->id,
-            'packet_id' => $packet->id,
-            'total_item' => 1,
-            'total_price' => $packet->price,
-            'pay_date' => now(),
-        ]);
-
-        Ticket::create([
-            'user_id' => $user->id,
-            'title' => 'Halo Dunia'
-        ]);
     }
 }

@@ -74,7 +74,7 @@
                 </div>
 
                 <!-- SidebarSearch Form -->
-                <div class="form-inline">
+                <!--<div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
                     <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                     <div class="input-group-append">
@@ -91,7 +91,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>Dasbor</p>
+                                <p>Dasboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -115,7 +115,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('ticket.*') ? 'active' : '' }}" href="{{ route('ticket.show') }}">
                                 <i class="nav-icon fas fa-info"></i>
-                                <p>Tiket</p>
+                                <p>Pengaduan</p>
                             </a>
                         </li>
                     </ul>
@@ -127,8 +127,8 @@
 
         {{ $slot }}
 
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2021 <a href="#">AiNetwork</a>.</strong>
+        <!--<footer class="main-footer">
+            //<strong>Copyright &copy; 2021 <a href="#">AiNetwork</a>.</strong>//
         </footer>
 
         <!-- Control Sidebar -->

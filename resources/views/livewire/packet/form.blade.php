@@ -34,13 +34,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Harga</label>
-                        <div>
-                            <input type="text" wire:model="price" placeholder="Harga Paket" class="form-control" />
-                            @error('price') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label>Kecepatan</label>
@@ -70,6 +64,14 @@
                                 <option value="ANUALLY">Tahunan</option>
                             </select>
                             @error('type') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <div>
+                            <input type="text" wire:model="price" placeholder="Harga Paket" class="form-control" />
+                            @error('price') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 

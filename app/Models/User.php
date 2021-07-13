@@ -25,12 +25,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'username',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     public function setPasswordAttribute($value)
     {
@@ -110,7 +105,7 @@ class User extends Authenticatable
     {
         if($this->transaction == null)
             return false;
-            
+
         return $this->transaction->where('pay_date', '>=', Carbon::now())->exists();
     }
 }

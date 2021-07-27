@@ -24,9 +24,9 @@ class Ticket extends Model
     public function statusLabel()
     {
         if ($this->status == "OPEN") {
-            return '<span class="text-green-600 font-semibold">Buka</span>';
+            return '<span class="text-green-600 font-semibold">Belum Selesai</span>';
         } else if ($this->status == 'CLOSE') {
-            return '<span class="text-red-600 font-semibold">Tutup</span>';
+            return '<span class="text-red-600 font-semibold">Selesai</span>';
         } else {
             return '<span class="text-gray-800 font-semibold">N/A</span>';
         }

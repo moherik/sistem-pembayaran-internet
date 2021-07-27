@@ -19,3 +19,7 @@ Livewire.on("confirmDeleteTicket", (ticketId) => {
         Livewire.emit("deleteTicket", ticketId);
     }
 });
+
+document.addEventListener("livewire:load", () => {
+    window.livewire.on("redirect", (url) => Turbolinks.visit(url));
+});

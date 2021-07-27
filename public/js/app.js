@@ -3817,6 +3817,11 @@ Livewire.on("confirmDeleteTicket", function (ticketId) {
     Livewire.emit("deleteTicket", ticketId);
   }
 });
+document.addEventListener("livewire:load", function () {
+  window.livewire.on("redirect", function (url) {
+    return Turbolinks.visit(url);
+  });
+});
 
 /***/ }),
 

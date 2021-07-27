@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
     Route::post('/register', [UserController::class, 'register'])->name('register');
     Route::post('/login', [UserController::class, 'login'])->name('login');
+    Route::post('/forgot-password', [UserController::class, 'forgotPassword'])->name('forgot-password');
 });
 
 Route::get('/transactions/pay-finish', [TransactionController::class, 'payFinish']);

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -37,5 +40,16 @@ class UserController extends Controller
 
         return response()
             ->json(['token' => $user->createToken($data['device_name'])->plainTextToken], 200);
+    }
+
+    public function forgotPassword(Request $request){
+        $request->validate(['email' => 'required|email']);
+
+        $response = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        $message = $response == Password::RESET_LINK_SENT ? 'Berhasil mengirim link reset password' : 'Terjadi kesalahan';
+        return response()->json(['message' => $message]);
     }
 }

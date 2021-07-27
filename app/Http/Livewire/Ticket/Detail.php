@@ -44,6 +44,14 @@ class Detail extends Component
             'body' => $this->body,
             'type' => 'FROM'
         ]);
-        $this->redirect('#');
+        return redirect()->to('/ticket/' . $this->ticketId);
     }
+
+    public function updateStatus()
+    {
+        $status = $this->ticket->status;
+        Ticket::where('id', $this->ticketId)->update(['status' => $status != "OPEN" ? "OPEN" : "CLOSE"]);
+        return redirect()->to('/ticket/' . $this->ticketId);
+    }
+
 }

@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return response()->json($request->user(), 200);
     })->name('me');
 
+    Route::post('/user/update-token', [UserController::class, 'updateFcmToken']);
+
     Route::group(['prefix' => '/packets', 'as' => 'packet.'], function () {
         Route::get('/', [PacketController::class, 'getAll'])->name('all');
         Route::get('/feed', [PacketController::class, 'feed'])->name('feed');
@@ -52,3 +54,4 @@ Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
 
 Route::get('/transactions/pay-finish', [TransactionController::class, 'payFinish']);
 Route::post('/transactions/notification', [TransactionController::class, 'handleMidtransHook']);
+Route::get('/notif/{title}/{message}', [TransactionController::class, 'sendNotification']);

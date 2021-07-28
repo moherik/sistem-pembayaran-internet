@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Packet;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,30 +134,51 @@ class TransactionController extends Controller
                     echo "Transaction order_id: " . $order_id . " is challenged by FDS";
                 } else {
                     // TODO set payment status in merchant's database to 'Success'
+                    $this->sendNotification('Pembayaran Sukses', 'pembayaran berhasil diverifikasi');
                     Transaction::where(['trx_code' => $order_id])->update(['status' => 'SUCCESS']);
                     echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
                 }
             }
         } else if ($transaction == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
+            $this->sendNotification('Transaksi Berhasil', 'pembayaran berhasil diverifikasi');
             Transaction::where(['trx_code' => $order_id])->update(['status' => 'SUCCESS']);
             echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
         } else if ($transaction == 'pending') {
             // TODO set payment status in merchant's database to 'Pending'
+            $this->sendNotification('Lanjutkan Transaksi', 'segera lakukan pembayaran untuk menyelesaikan transaksi');
             Transaction::where(['trx_code' => $order_id])->update(['status' => 'WAITING']);
             echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
         } else if ($transaction == 'deny') {
             // TODO set payment status in merchant's database to 'Denied'
+            $this->sendNotification('Transaksi Gagal', 'pembayaran ditolak');
             Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
             echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
         } else if ($transaction == 'expire') {
             // TODO set payment status in merchant's database to 'expire'
+            $this->sendNotification('Transaksi Gagal', 'masa pembayaran telah habis');
             Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
             echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is expired.";
         } else if ($transaction == 'cancel') {
             // TODO set payment status in merchant's database to 'Denied'
+            $this->sendNotification('Transaksi Gagal', 'pembayaran ditolak');
             Transaction::where(['trx_code' => $order_id])->update(['status' => 'CANCEL']);
             echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is canceled.";
         }
+    }
+
+    public function sendNotification($title, $message)
+    {
+        $tokens = User::where('fcm_token', '!=', '')->pluck('fcm_token')->toArray();
+
+        fcm()
+            ->to($tokens)
+            ->priority('normal')
+            ->timeToLive(2419200)
+            ->notification([
+                'title' => $title,
+                'body' => $message,
+            ])
+            ->send();
     }
 }

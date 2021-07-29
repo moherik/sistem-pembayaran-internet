@@ -173,7 +173,7 @@ class TransactionController extends Controller
 
         fcm()
             ->to($tokens)
-            ->priority('normal')
+            ->priority('high')
             ->timeToLive(2419200)
             ->notification([
                 'title' => $title,
